@@ -1,0 +1,58 @@
+/* Global Reset */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Light grey background for the whole page */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* This centers the content vertically */
+    min-height: 100vh;
+}
+
+/* Card Style - This creates the white box look */
+.card-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 100%;
+    max-width: 400px; /* Limits width for Login/Register */
+    margin: auto;
+    text-align: center;
+}
+
+/* Form Elements */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+    font-size: 14px;
+}
+
+/* Primary Button (Blue) */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Secondary Link */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+a:hover { text-decoration: underline; }
