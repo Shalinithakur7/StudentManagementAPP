@@ -8,16 +8,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Setup Database (SQL Server)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 2. Setup Identity (For Registration/Login)
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-// 3. Setup JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 
@@ -42,7 +40,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 4. CORS (Allow Angular)
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
@@ -55,7 +53,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// --- Middleware Pipeline ---
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -63,20 +60,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-app.UseCors("AllowAngular"); // CORS must be before Auth
+app.UseCors("AllowAngular"); 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Requirement 1a: Seed Dummy Data
 if (app.Environment.IsDevelopment())
 {
     using (var scope = app.Services.CreateScope())
     {
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        // context.Database.EnsureCreated(); // Optional: Create DB if not exists
     }
 }
+
 
 app.Run();
